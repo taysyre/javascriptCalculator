@@ -1,0 +1,72 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    color: #fff;
+  }
+  
+  body {
+    font-family: monospace, sans-serif;
+    font-weight: bold;
+  
+  }
+  h1 {
+    text-align: center;
+  }
+  
+  .calc-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 90px);
+    grid-template-rows: minmax(100px, auto) repeat(6, 70px);
+    justify-content: center;
+    align-content: center;
+    min-height: 100vh;
+  }
+  .calc-grid .output-display {
+    grid-column: 1 / -1;
+    background-color: rgba(0, 0, 0, 0.9);
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-around;
+    flex-direction: column;
+    padding: 10px;
+    
+  }
+  .previous-operand {
+    font-size: x-large;
+    color: rgba(255, 255, 255, 0.7);
+  }
+  .current-operand {
+    font-size: x-large;
+  }
+  .calc-grid .span-two {
+    grid-column: span 2;
+  }
+  
+  .calc-grid > button {
+    background-color: rgba(1, 1, 1, 0.7);
+    font-weight: bold;
+    font-size: x-large; 
+    border-style: double;
+  }
+  .calc-grid > button:hover {
+    background-color: rgba(0, 0, 0, 0.9);
+  } 
+  button[data-all-clear], button[data-delete], button[data-equals] {
+    background-color: blue;
+  }
+  button[data-all-clear]:hover, button[data-delete]:hover, button[data-equals]:hover {
+    background-color: rgb(71, 71, 251);
+  }
+  button[data-operation]:hover {
+    background-color:  rgb(52, 47, 47);
+  } 
+  button[data-number]:hover {
+    background-color: rgb(52, 47, 47);
+  }
+  #point  {
+    background-color: rgb(52, 47, 47);
+  }
+  #point:hover {
+    background-color: rgb(85, 81, 81);
+  }
