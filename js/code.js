@@ -43,11 +43,11 @@ equalsButton.addEventListener('click', () => {
 function logToCurrent() {
   currentOperand.textContent = calculationMemory.replaceAll('××', '^').replaceAll('√', '^(1/2)')
 }
-data-operations.addEventListener('click' , ()=>{
-      alert("Error");
-  })
-  input = $this.attr("value")
-if (!/\./.test(keysPressed)) {
-  // no dot pressed before now, so add to keysPressed
-  keysPressed += input; // adds input because there was not a previous dot in keysPressed
-}
+// data-operations.addEventListener('click' , ()=>{
+//       alert("Error");
+//   })
+//   input = $this.attr("value")
+// if (!/\./.test(keysPressed)) {
+//   // no dot pressed before now, so add to keysPressed
+//   keysPressed += input; // adds input because there was not a previous dot in keysPressed
+// }
