@@ -21,6 +21,7 @@
     justify-content: center;
     align-content: center;
     min-height: 100vh;
+
   }
   .calc-grid .output-display {
     grid-column: 1 / -1;
@@ -30,7 +31,15 @@
     justify-content: space-around;
     flex-direction: column;
     padding: 10px;
-    
+    box-shadow: 0 0 6px 4px white;
+    overflow-x: hidden;
+  }
+  .icon{
+    align-self: flex-start;
+    position: absolute;
+  }
+  .calc-body {
+    box-shadow:white;
   }
   .previous-operand {
     font-size: x-large;
@@ -48,6 +57,7 @@
     font-weight: bold;
     font-size: x-large; 
     border-style: double;
+    box-shadow: 0 0 6px 4px white;
   }
   .calc-grid > button:hover {
     background-color: rgba(0, 0, 0, 0.9);
@@ -59,14 +69,29 @@
     background-color: rgb(71, 71, 251);
   }
   button[data-operation]:hover {
-    background-color:  rgb(52, 47, 47);
+    background-color:  rgb(232, 232, 53);
   } 
   button[data-number]:hover {
     background-color: rgb(52, 47, 47);
   }
-  #point  {
+  #dot  {
     background-color: rgb(52, 47, 47);
   }
-  #point:hover {
+  #dot:hover {
     background-color: rgb(85, 81, 81);
   }
+
+@media only screen and (max-width: 450px){
+  .calc-grid {
+      /* max-width: 300px; */
+    scale: 0.75;
+  }
+ 
+}
+@media only screen and (max-width: 300px){
+  .calc-grid {
+      /* max-width: 300px; */
+    scale: 0.6;
+  }
+ 
+}

@@ -16,17 +16,19 @@
     }
 </style>
   <div class="calc-grid">
-    <div data-output-display class="output-display">
+    <div data-output-display class="output-display" inputmode="text">
+      <img class="icon" src="./img/pngwing.com.png" width="55">
       <div data-previous-operand class="previous-operand"></div>
       <div data-current-operand class="current-operand"></div>
     </div>
+    
     <button data-all-clear class="span-two">AC</button>
     <button data-operation>(</button>
     <button data-operation>)</button>
     <button data-delete>DEL</button>
-    <button data-operation>√</button>
+    <button data-operation>%</button>
     <button data-operation>^</button>
-    <button data-operation>×</button>
+    <button data-operation>x</button>
     <button data-number>1</button>
     <button data-number>2</button>
     <button data-number>3</button>
@@ -39,9 +41,13 @@
     <button data-number>8</button>
     <button data-number>9</button>
     <button data-operation>-</button>
-    <button id="point" data-number>.</button>
+    <button id="dot" data-number>.</button>
     <button data-number>0</button>
     <button data-equals class="span-two">=</button>
+  </div>
+ 
+  <div id="wrapper">
+    <div id="app"></div>
   </div>
   <script src="./js/code.js"></script>
 </body>
