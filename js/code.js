@@ -1,53 +1,78 @@
-// Grabbing Current/Previous operand displays from the DOM
+// Getting Current/Previous operand from D0M
 const previousOperand = document.querySelector('[data-previous-operand]');
 const currentOperand = document.querySelector('[data-current-operand]');
-// Grabbing Buttons from the DOM
+// Getting the Buttons from the DOM
 const allClearButton = document.querySelector('[data-all-clear]');
 const deleteButton = document.querySelector('[data-delete]');
-const mathButtons = document.querySelectorAll('[data-operation], [data-number]');
+const operationButtons = document.querySelectorAll('[data-operation]');
+const numberButtons = document.querySelectorAll('[data-number]');
+const decimalButton = document.querySelector('[data-decimal]');
 const equalsButton = document.querySelector('[data-equals]');
 // Creating Calculation memory variable, which will have the value of the previous calculation by default
-let calculationMemory = previousOperand.textContent;
+let Memory = previousOperand.textContent;
+let decimalAllowed = true
 
 // Clearing 2 Displays and the memory when 'AC' button clicked
 allClearButton.addEventListener('click', () => {
   previousOperand.textContent = ''
   currentOperand.textContent = ''
-  calculationMemory = ''
+ Memory = ''
+  decimalAllowed = true
+})
+//For each number/operation button, add an event listener, so that when clicked, it adds its symbol/number to the memory string, and updates 'current' display
+numberButtons.forEach((button) => {
+  button.addEventListener('click', () => {
+    Memory += `${button.textContent}`
+    displayCurrent()
+  })
+})
+decimalButton.addEventListener('click', () => {
+  if (decimalAllowed ) {
+    Memory += `${decimal.textContent}`
+    displayCurrent()
+    decimalAllowed = false
+  }
 })
 // Removes last character from memory string then updating the display when clicking 'Delete'
 deleteButton.addEventListener('click', () => {
-  calculationMemory = calculationMemory.slice(0, -1)
-  logToCurrent()
+  if (Memory[Memory.length-1] == '.') {
+    decimalAllowed = true
+  }
+ Memory = Memory.slice(0, -1)
+  displayCurrent()
 })
-//For each number/operation button, add an event listener, so that when clicked, it adds its symbol/number to the memory string, and updates 'current' display
-mathButtons.forEach((button) => {
+
+operationButtons.forEach((button) => {
   button.addEventListener('click', () => {
-    calculationMemory += `${button.textContent}`
-    logToCurrent()
+    Memory += `${button.textContent}`
+    displayCurrent()
+    decimalAllowed = true
   })
 })
 
+
 equalsButton.addEventListener('click', () => {
   // Replace all Special Characters in memory string, with characters that JS can calculate with.
-  let expression = calculationMemory.replaceAll('√', '**(1/2)').replaceAll('^', '**').replaceAll('×', '*').replaceAll('÷', '/')
+  let expression = Memory.replaceAll('%', '**(1/2)').replaceAll('^', '**').replaceAll('×', '*').replaceAll('÷', '/').replaceAll('x', '')
   // Evaluating the expression from the memory
-  let result = eval(expression) 
-  // Setting precious operation on the display to the current operand
-  previousOperand.textContent = currentOperand.textContent
-  // Changing current Operand on display to the result of the calculation, and saving it to the memory
-  currentOperand.textContent = result
-  calculationMemory =  result.toString()
+ try{
+   let result = eval(expression) 
+   // Setting previous operation on the display to the current operand
+   previousOperand.textContent = currentOperand.textContent
+   // Changing current Operand on display to the result of the calculation, and saving it to the memory
+   currentOperand.textContent = result
+  Memory =  result.toString()
+   if (currentOperand.textContent.includes('.')) {
+     decimalAllowed = false
+   } else decimalAllowed = true
+
+ } catch(e) {
+    console.log(e);
+    previousOperand.textContent = currentOperand.textContent
+    currentOperand.textContent = 'Invalid Input'
+ }
 })
 //Updates Current Operand Display
-function logToCurrent() {
-  currentOperand.textContent = calculationMemory.replaceAll('××', '^').replaceAll('√', '^(1/2)')
+function displayCurrent() {
+  currentOperand.textContent = Memory.replaceAll('××', '^').replaceAll('x', '')
 }
-// data-operations.addEventListener('click' , ()=>{
-//       alert("Error");
-//   })
-//   input = $this.attr("value")
-// if (!/\./.test(keysPressed)) {
-//   // no dot pressed before now, so add to keysPressed
-//   keysPressed += input; // adds input because there was not a previous dot in keysPressed
-// }
